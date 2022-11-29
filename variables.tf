@@ -76,7 +76,7 @@ variable "tags" {
   default = {}
 
   validation {
-    condition     = length(var.tags) > 8
+    condition     = length(keys(var.tags)) > 8
     error_message = "You can assign up to 8 tags to the S3 Object."
   }
 }
