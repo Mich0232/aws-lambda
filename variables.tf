@@ -6,6 +6,10 @@ variable "aws_region" {
   type = string
 }
 
+variable "project_name" {
+  type = string
+}
+
 variable "function_name" {
   type = string
 }
@@ -28,10 +32,6 @@ variable "runtime" {
 variable "handler" {
   type    = string
   default = "main.handler"
-}
-
-variable "project_name" {
-  type = string
 }
 
 variable "policies" {
@@ -71,6 +71,14 @@ variable "deployment_package" {
   type = string
 }
 
+variable "tags" {
+  type = map(string)
+
+  validation {
+    condition     = length(var.tags) > 8
+    error_message = "You can assign up to 8 tags to the S3 Object."
+  }
+}
 
 locals {
   function_name_with_prefix = "${var.project_name}-${var.function_name}"
