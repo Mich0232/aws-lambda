@@ -3,6 +3,7 @@
 This module creates a simple AWS function.
 Function can be integrated with AWS Package module to create an on-change triggered function deployment. 
 
+Note: Function will be granted access to the deployment bucket provided in the configuration.
 
 ### Provisioned Resources:
 
@@ -11,10 +12,6 @@ Function can be integrated with AWS Package module to create an on-change trigge
 
 ### Input Variables:
 
-`aws_account_id` - AWS Account ID number
-
-`aws_region` - AWS Region
-
 `project_name` - Name of the project (Project name will be included as a prefix in resources)
 
 `function_name` - Lambda function name (Note: final lambda name will consist of project + lambda names)
@@ -22,6 +19,10 @@ Function can be integrated with AWS Package module to create an on-change trigge
 `policies` - list or IAM policy arns that will be attached to lambda's IAM Role.
 
 `layers` - list of AWS Layer's arns to attached to function.
+
+`enable_cloudwatch_logs` - If true 'AWSLambdaBasicExecutionRole' will be attached. (default: true)
+
+`enable_x_ray_tracing` - If true 'AWSXRayDaemonWriteAccess' will be attached. (default: false)
 
 `deployment_bucket_arn` - ARN of S3 bucket containing the AWS lambda deployment package.
 

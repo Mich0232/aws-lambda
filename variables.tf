@@ -1,11 +1,3 @@
-variable "aws_account_id" {
-  type = string
-}
-
-variable "aws_region" {
-  type = string
-}
-
 variable "project_name" {
   type = string
 }
@@ -81,6 +73,18 @@ variable "tags" {
   }
 }
 
+variable "enable_cloudwatch_logs" {
+  type    = bool
+  default = true
+}
+
+variable "enable_x_ray_tracing" {
+  type    = bool
+  default = false
+}
+
 locals {
-  function_name_with_prefix = "${var.project_name}-${var.function_name}"
+  function_name_with_prefix     = "${var.project_name}-${var.function_name}"
+  cloudwatch_logging_policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+  x_ray_policy_arn              = "arn:aws:iam::aws:policy/service-role/AWSXRayDaemonWriteAccess"
 }
