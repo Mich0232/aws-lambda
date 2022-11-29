@@ -72,7 +72,8 @@ variable "deployment_package" {
 }
 
 variable "tags" {
-  type = map(string)
+  type    = map(string)
+  default = {}
 
   validation {
     condition     = length(var.tags) > 8
