@@ -47,15 +47,15 @@ resource "aws_iam_role_policy_attachment" "deployment_bucket_policy" {
 }
 
 resource "aws_iam_role_policy_attachment" "cloudwatch_logs_policy" {
-  for_each   = var.enable_cloudwatch_logs ? [1] : []
+  for_each   = var.enable_cloudwatch_logs ? toset([local.cloudwatch_logging_policy_arn]) : []
   role       = aws_iam_role.lambda_role.name
-  policy_arn = local.cloudwatch_logging_policy_arn
+  policy_arn = each.key
 }
 
 resource "aws_iam_role_policy_attachment" "x_ray_tracing_policy" {
-  for_each   = var.enable_x_ray_tracing ? [1] : []
+  for_each   = var.enable_x_ray_tracing ? toset([local.x_ray_policy_arn]) : []
   role       = aws_iam_role.lambda_role.name
-  policy_arn = local.x_ray_policy_arn
+  policy_arn = each.key
 }
 
 resource "aws_iam_role_policy_attachment" "this" {
