@@ -34,6 +34,8 @@ Function can be integrated with AWS Package module to create an on-change trigge
 
 ### Outputs
 
+`function_name` - Function name
+
 `arn` - ARN of created function
 
 `invoke_arn` - Invoke ARN of created function
