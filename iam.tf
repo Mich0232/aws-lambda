@@ -12,6 +12,10 @@ data "aws_iam_policy_document" "lambda_role" {
 resource "aws_iam_role" "lambda_role" {
   name               = "${local.function_name_with_prefix}-lambda-role"
   assume_role_policy = data.aws_iam_policy_document.lambda_role.json
+
+  tags = merge(var.tags, {
+    Project = var.project_name
+  })
 }
 
 data "aws_iam_policy_document" "s3_deployment_bucket_access" {
@@ -39,6 +43,10 @@ data "aws_iam_policy_document" "s3_deployment_bucket_access" {
 resource "aws_iam_policy" "s3_deployment_bucket_access_policy" {
   name   = "${local.function_name_with_prefix}-deployment-bucket-access"
   policy = data.aws_iam_policy_document.s3_deployment_bucket_access.json
+
+  tags = merge(var.tags, {
+    Project = var.project_name
+  })
 }
 
 resource "aws_iam_role_policy_attachment" "deployment_bucket_policy" {
