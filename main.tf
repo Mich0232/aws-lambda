@@ -22,7 +22,7 @@ resource "aws_lambda_function" "this" {
   }
 
   s3_bucket        = var.deployment_bucket_name
-  s3_key           = var.deployment_package
+  s3_key           = var.deployment_package_key
   source_code_hash = var.source_code_hash
 
   tags = merge(var.tags, {

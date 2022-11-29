@@ -67,7 +67,7 @@ variable "deployment_bucket_name" {
   type = string
 }
 
-variable "deployment_package" {
+variable "deployment_package_key" {
   type = string
 }
 
