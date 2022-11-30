@@ -42,3 +42,50 @@ Note: Function will be granted access to the deployment bucket provided in the c
 `invoke_arn` - Invoke ARN of created function
 
 `version` - Latest published version of created function
+
+
+### Example
+
+```terraform
+module "lambda" {
+  source = "https://github.com/Mich0232/aws-lambda.git"
+
+  project_name  = "example-project"
+  function_name = "my-service"
+
+  deployment_bucket_arn  = aws_s3_bucket.deployment_bucket.arn
+  deployment_bucket_name = aws_s3_bucket.deployment_bucket.bucket
+  deployment_package_key = "my-service/build.zip"
+  source_code_hash       = "83bc6426i7b73ci"
+}
+```
+
+Using [aws-package module](https://github.com/Mich0232/aws-package):
+
+
+```terraform
+module "code" {
+  source = "https://github.com/Mich0232/aws-package.git"
+
+  deployment_bucket_id     = aws_s3_bucket.deployment_bucket.id
+  deployment_bucket_prefix = "example"
+  source_dir               = "../src"
+  output_dir               = "../output/code"
+
+  hash_sources   = [ "*.py" ]
+  excluded_paths = [ "__pycache__" ]
+}
+
+
+module "lambda" {
+  source = "https://github.com/Mich0232/aws-lambda.git"
+
+  project_name  = "example-project"
+  function_name = "my-service"
+
+  deployment_bucket_arn  = aws_s3_bucket.deployment_bucket.arn
+  deployment_bucket_name = aws_s3_bucket.deployment_bucket.bucket
+  deployment_package_key = module.code.key
+  source_code_hash       = module.code.output_base64sha256
+}
+```
