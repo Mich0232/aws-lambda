@@ -48,7 +48,7 @@ Note: Function will be granted access to the deployment bucket provided in the c
 
 ```terraform
 module "lambda" {
-  source = "https://github.com/Mich0232/aws-lambda.git"
+  source = "github.com/Mich0232/aws-lambda.git"
 
   project_name  = "example-project"
   function_name = "my-service"
@@ -65,7 +65,7 @@ Using [aws-package module](https://github.com/Mich0232/aws-package):
 
 ```terraform
 module "code" {
-  source = "https://github.com/Mich0232/aws-package.git"
+  source = "github.com/Mich0232/aws-package.git"
 
   deployment_bucket_id     = aws_s3_bucket.deployment_bucket.id
   deployment_bucket_prefix = "example"
@@ -78,7 +78,7 @@ module "code" {
 
 
 module "lambda" {
-  source = "https://github.com/Mich0232/aws-lambda.git"
+  source = "github.com/Mich0232/aws-lambda.git"
 
   project_name  = "example-project"
   function_name = "my-service"
