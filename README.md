@@ -30,6 +30,16 @@ Note: Function will be granted access to the deployment bucket provided in the c
 
 `deployment_package_key` - Key of S3 bucket object with the AWS lambda deployment package.
 
+### Lambda settings
+
+[AWS Lambda Documentation](https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html) 
+
+- `timeout` - 60s
+- `memory` - 128mb
+- `runtime` - python3.9
+- `handler` - main.handler
+- `architectures` - x86_64
+
 `tags` - map of lambda tags (Up to 8 can be specified since, Name and Project will be added by default)
 
 

@@ -18,7 +18,7 @@ variable "memory" {
 
 variable "runtime" {
   type    = string
-  default = "python3.8"
+  default = "python3.9"
 }
 
 variable "handler" {
